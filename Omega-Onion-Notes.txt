@@ -4,5 +4,5 @@
 /root/source/staging_dir/toolchain-mipsel_24kc_gcc-5.4.0_musl-1.1.16/bin/mipsel-openwrt-linux-gcc
 
 ***Web Site Tutorial From Omega Onion***
-(https://onion.io/2bt-cross-compiling-programs/)[https://onion.io/2bt-cross-compiling-programs]
+https://onion.io/2bt-cross-compiling-programs/
 
