@@ -9,6 +9,7 @@
 #docker run -it <repo name>/<repo branch> (run container)
 #docker exec -it <container ID> bash (attaches CTRL-c to SIGKILL)
 #docker rename <container ID> <new name>
+#docker start -a -i <container ID>
 
 #Docker Commands
 FROM onion/omega2-source
