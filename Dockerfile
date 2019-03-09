@@ -6,10 +6,13 @@
 #docker ps -s (views containers with size)
 #docker rm <container ID> (removes a specific container)
 #docker rmi <Image ID> (removes a specific image)
-#docker run -it <repo name>/<repo branch> (run container)
-#docker exec -it <container ID> bash (attaches CTRL-c to SIGKILL)
+
+#docker run -itd <image ID> (run container)
+#docker attach <container ID>(attaches CTRL-p CTRL-Q to SIGKILL)
+
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
+
 
 #Docker Commands
 FROM onion/omega2-source
