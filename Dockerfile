@@ -8,10 +8,9 @@
 #docker rmi <Image ID> (removes a specific image)
 #docker daemon --storage-opt dm.basesize=30G
 #docker system df (system partition sizes)
-
+#docker stats -a (shows running statics of all containers)
 #docker run -itd <image ID> (run container)
 #docker attach <container ID>(attaches CTRL-p CTRL-Q to SIGKILL)
-
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
 
