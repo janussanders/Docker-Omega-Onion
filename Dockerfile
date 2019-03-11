@@ -6,7 +6,7 @@
 #docker ps -s (views containers with size)
 #docker rm <container ID> (removes a specific container)
 #docker rmi <Image ID> (removes a specific image)
-#docker daemon --storage-opt dm.basesize=30G (see web for current techniqe)
+#docker daemon --storage-opt dm.basesize=30G (see web for current technique)
 #docker system df (system partition sizes)
 #docker stats -a (shows running statics of all containers)
 #docker run -itd <image ID> (run container)
