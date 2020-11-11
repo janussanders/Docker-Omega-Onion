@@ -14,6 +14,13 @@
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
 
+docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_build_env_1701
+
+*** LEDE 18.08 Packages ***
+~/source_18.08/bin/targets/ramips/mt76x8/packages
+
+*** Firmware 18.08 ***
+~/source_18.08/bin/targets/ramips/mt76x8
 
 #Docker Commands
 FROM onion/omega2-source
