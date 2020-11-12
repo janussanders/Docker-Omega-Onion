@@ -14,7 +14,12 @@
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
 
-docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_build_env_1701
+docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_rebuild_1701
+
+docker exec -it <container name> /bin/bash
+
+docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
+
 
 *** LEDE 18.08 Packages ***
 ~/source_18.08/bin/targets/ramips/mt76x8/packages
