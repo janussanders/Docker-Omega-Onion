@@ -20,6 +20,12 @@ docker exec -it <container name> /bin/bash
 
 docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
 
+*** Building the code ***
+sh xCompile.sh -buildroot ~/source/ -lib ugpio
+
+*** Compile individual Modules ***
+make V=s package/ffmpeg-custom/{clean,prepare,compile} 2>&1 | tee ffmpeg-custom.log
+
 
 *** LEDE 18.08 Packages ***
 ~/source_18.08/bin/targets/ramips/mt76x8/packages
