@@ -24,7 +24,7 @@ docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/
 sh xCompile.sh -buildroot ~/source/ -lib ugpio
 
 *** Compile individual Modules ***
-make V=s package/ffmpeg-custom/{clean,prepare,compile} 2>&1 | tee ffmpeg-custom.log
+make V=s package/ffmpeg-custom/{clean,prepare,install,compile} 2>&1 | tee ffmpeg-custom.log
 
 
 *** LEDE 18.08 Packages ***
