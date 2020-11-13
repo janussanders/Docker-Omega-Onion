@@ -23,6 +23,12 @@ docker exec -it <container name> /bin/bash
 *** mount MAC to an image ***
 docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
 
+*** commit container changes to an image ***
+Note: this will create a new image so make sure the new name is not the same as
+      The original.
+
+docker commit -m "commit message" <container id> janussanders/janusinnovations:Omega_Onion_All_Deps_1701 
+
 *** Building the code ***
 sh xCompile.sh -buildroot ~/source/ -lib ugpio
 
