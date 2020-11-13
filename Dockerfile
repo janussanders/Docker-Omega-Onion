@@ -46,6 +46,10 @@ make V=s package/libbz2/{clean,prepare,install,compile} 2>&1 | tee libbz2.log
 5. libx264_snapshot-20160815-2245-stable-3_mipsel_24kc.ipk
 6. ffmpeg_3.2.2-1_mipsel_24kc.ipk
 
+*** FFMPEG Commands ***
+ffmpeg -i /dev/video0 -framerate 30 -video_size 1280x720 \
+-b:v 2M -c:v mp4 -maxrate 221184k -bufsize 221184k -fs 2M \
+-pix_fmt yuv420p -filter:v "setpts=0.9*PTS" -qscale:v 3 -deinterlace -g 30 /tmp/video/test_vid.mp4
 
 *** LEDE 18.08 Packages ***
 ~/source_18.08/bin/targets/ramips/mt76x8/packages
