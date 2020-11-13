@@ -14,17 +14,31 @@
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
 
+*** Attach to an image that has no container running ***
 docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_rebuild_1701
 
+*** Attach to a Running Container ***
 docker exec -it <container name> /bin/bash
 
+*** mount MAC to an image ***
 docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
 
 *** Building the code ***
 sh xCompile.sh -buildroot ~/source/ -lib ugpio
 
 *** Compile individual Modules ***
-make V=s package/ffmpeg-custom/{clean,prepare,install,compile} 2>&1 | tee ffmpeg-custom.log
+a. ffmpeg
+make V=s package/ffmpeg/{clean,prepare,install,compile} 2>&1 | tee ffmpeg.log
+B. libbz2
+make V=s package/libbz2/{clean,prepare,install,compile} 2>&1 | tee libbz2.log
+
+*** FFMPEG Dependencies ***
+1. libffmpeg-full_3.2.2-1_mipsel_24kc.ipk
+2. libbz2_1.0.6-2_mipsel_24kc.ipk
+3. alsa-lib_1.1.0-2_mipsel_24kc.ipk
+4. libopus_1.1.4-1_mipsel_24kc.ipk
+5. libx264_snapshot-20160815-2245-stable-3_mipsel_24kc.ipk
+6. ffmpeg_3.2.2-1_mipsel_24kc.ipk
 
 
 *** LEDE 18.08 Packages ***
