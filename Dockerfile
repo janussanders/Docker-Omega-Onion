@@ -20,7 +20,7 @@ docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam
 *** Attach to a Running Container ***
 docker exec -it <container name> /bin/bash
 
-*** mount MAC to an image ***
+*** mount Volume to an image ***
 docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
 
 *** commit container changes to an image ***
@@ -51,6 +51,8 @@ ffmpeg -i /dev/video0 -framerate 30 -video_size 1280x720 \
 -b:v 2M -c:v mp4 -maxrate 221184k -bufsize 221184k -fs 2M \
 -pix_fmt yuv420p -filter:v "setpts=0.9*PTS" -qscale:v 3 -deinterlace -g 30 /tmp/video/test_vid.mp4
 
+ffmpeg -i /dev/video0 -framerate 30 -video_size 1280x720 out.mkv
+
 *** LEDE 18.08 Packages ***
 ~/source_18.08/bin/targets/ramips/mt76x8/packages
 
@@ -61,13 +63,48 @@ ffmpeg -i /dev/video0 -framerate 30 -video_size 1280x720 \
 FROM onion/omega2-source
 MAINTAINER janussanders@gmail.com
 
-RUN apt-get update
-RUN apt-get -f install -y
-RUN apt-get install apt-utils time -y
-RUN git checkout .config
-RUN git checkout lede-17.01
-RUN git pull
-RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install -a
+****************************************************************************************
+[Original Omega Onion Distro]
+** remove any previous directories if upgrading versions **
+rm -R source/ 
 
-RUN make -j1 V=s
+** Install required libraries **
+apt-get install -y git wget subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt git-core unzip libssl-dev python-dev python-pip libxml-parser-perl
+
+
+** download the latest Omega Onion GitHub repo **
+git clone https://github.com/OnionIoT/source.git
+
+****************************************************************************************
+*** Alternative OpenWrt 18.06.8 Build (MultiMedia) ***
+1.
+apt-get install -y subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt git-core unzip libssl-dev
+
+2.
+git clone https://git.openwrt.org/openwrt/openwrt.git
+
+3.
+cd openwrt
+
+4.
+git checkout -b v18.06.8
+
+5.
+*Add line to feeds.conf.default file*
+src-git onion https://github.com/OnionIoT/OpenWRT-Packages.git
+
+6.
+./scripts/feeds update -a
+./scripts/feeds install -a
+****************************************************************************************
+
+** Configure the target and packages **
+7. make menuconfig
+8. For Target System, select MediaTek Ralink MIPS
+9. For Subtarget, select MT7688 based boards
+10. For Target Profile, select Multiple Devices
+11. A new item will appear on the Main menu, Target Devices
+   For Target Devices, select Onion Omega2 and Onion Omega2+
+12. Exit and save your configuration
+
+make -j8 -k V=s
