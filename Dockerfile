@@ -32,6 +32,8 @@ Website tutorial: https://yoursunny.com/t/2019/omega2pro-openwrt/
 To enable WiFi access point, I just need to type a few commands on the serial console:
 
 uci set wireless.radio0.disabled=0
+uci set wireless.@wifi-iface[0].encryption=psk2
+uci set wireless.@wifi-iface[0].key="your_password"
 uci commit
 wifi
 
