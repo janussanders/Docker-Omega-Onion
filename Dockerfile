@@ -6,13 +6,36 @@
 #docker ps -s (views containers with size)
 #docker rm <container ID> (removes a specific container)
 #docker rmi <Image ID> (removes a specific image)
-#docker daemon --storage-opt dm.basesize=30G (see web for current technique)
+#docker daemon --storage-opt dm.basesize=50G (see web for current technique)
+–storage-driver=devicemapper --storage-opt dm.basesize=20G
 #docker system df (system partition sizes)
 #docker stats -a (shows running statics of all containers)
 #docker run -itd <image ID> (run container)
 #docker attach <container ID>(use CTRL-p CTRL-Q to SIGKILL)
 #docker rename <container ID> <new name>
 #docker start -a -i <container ID>
+docker save myimage:latest | gzip > myimage_latest.tar.gz
+docker image ls
+
+**** Firmware Update Omega Onion ****
+MAC: ssh-keygen -R 192.168.3.1
+MAC: ssh root@192.168.3.1
+
+Website tutorial: https://yoursunny.com/t/2019/omega2pro-openwrt/
+
+1. Navigate to tmp drive and locate the .bin update
+
+2. sysupgrade -n -F /mnt/sda1/openwrt-19.07.4-ramips-mt76x8-omega2p-squashfs-sysupgrade.bin
+
+3. Unlike OnionOS, a standard OpenWrt 18.06 installation does not automatically create a WiFi access point, but only accepts wired connections. I did not purchase the Ethernet expansion for Omega2, so I have to activate WiFi before doing anything else.
+
+To enable WiFi access point, I just need to type a few commands on the serial console:
+
+uci set wireless.radio0.disabled=0
+uci commit
+wifi
+
+**********************
 
 *** Attach to an image that has no container running ***
 docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_rebuild_1701
@@ -21,7 +44,7 @@ docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam
 docker exec -it <container name> /bin/bash
 
 *** mount Volume to an image ***
-docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/source/projects/ janussanders/janusinnovations:guncam_rebuild_1701
+docker run -it --rm --privileged --pid=host -d -v /Users/janussanders/Documents/onion:/root/openwrt/projects/ janussanders/janusinnovations:Openwrt_19.07.4
 
 *** commit container changes to an image ***
 Note: this will create a new image so make sure the new name is not the same as
@@ -78,7 +101,8 @@ git clone https://github.com/OnionIoT/source.git
 ****************************************************************************************
 *** Alternative OpenWrt 18.06.8 Build (MultiMedia) ***
 1.
-apt-get install -y subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt git-core unzip libssl-dev
+apt-get update
+apt-get install -y git wget subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt git-core unzip libssl-dev python-dev python-pip libxml-parser-perl
 
 2.
 git clone https://git.openwrt.org/openwrt/openwrt.git
@@ -90,10 +114,6 @@ cd openwrt
 git checkout -b v18.06.8
 
 5.
-*Add line to feeds.conf.default file*
-src-git onion https://github.com/OnionIoT/OpenWRT-Packages.git
-
-6.
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 ****************************************************************************************
