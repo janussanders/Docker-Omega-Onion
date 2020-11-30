@@ -17,6 +17,14 @@
 docker save myimage:latest | gzip > myimage_latest.tar.gz
 docker image ls
 
+******* USB Diagnostics ****
+1. Diagnostics: dmesg | tail -n3
+2. opkg update
+   opkg install usbutils
+   opkg install kmod-usb-core kmod-usb2 kmod-video-core
+   opkg install kmod-video-uvc
+   (for GSPCA) opkg install kmod-video-gspca-core kmod-video-gspca-xxxxx
+
 **** Firmware Update Omega Onion ****
 MAC: ssh-keygen -R 192.168.3.1
 MAC: ssh root@192.168.3.1
