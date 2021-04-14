@@ -31,7 +31,8 @@ MAC: ssh root@192.168.3.1
 
 Website tutorial: https://yoursunny.com/t/2019/omega2pro-openwrt/
 
-1. Navigate to tmp drive and locate the .bin update
+1. Navigate to tmp drive and locate the .bin update: 
+wget https://archive.openwrt.org/releases/19.07.4/targets/ramips/mt76x8/openwrt-19.07.4-ramips-mt76x8-omega2p-squashfs-sysupgrade.bin
 
 2. sysupgrade -n -F /mnt/sda1/openwrt-19.07.4-ramips-mt76x8-omega2p-squashfs-sysupgrade.bin
 
