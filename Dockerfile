@@ -46,6 +46,12 @@ uci commit
 wifi
 
 **********************
+connecting to the serial port on the mac
+Download and install the Silicon Labs CP2102 driver for OS X
+https://www.silabs.com/Support%20Documents/Software/Mac_OSX_VCP_Driver.zip
+**********************
+> /dev/tty.* (list all available usb serial devices)
+> screen /dev/tty.usbserial-0001 115200
 
 *** Attach to an image that has no container running ***
 docker run -it --rm --privileged --pid=host janussanders/janusinnovations:guncam_rebuild_1701
